@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TYT 2023</title>
+    <meta name="description" content="2023 tyt sınavına kalan süre" />
+    <meta property="og:title" content="2023 TYT" />
+    <meta
+      property="og:description"
+      content="2023 yılı TYT sınavına kalan zamanı görün!"
+    />
+    <meta
+      property="og:image"
+      content="https://sislimpal.meb.k12.tr/meb_iys_dosyalar/34/20/974888/resimler/2019_11/k_20163559_TYT.jpg"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100vh;
+        background-color: #25262d;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      h1 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 1.75rem;
+        opacity: 0.75;
+      }
+      .clock {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+        width: 15rem;
+        font-size: 2rem;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+      .clock #ayrac {
+        transform: translateY(-5%);
+      }
+      .loading {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        color: white;
+        font-size: 3rem;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #25262d;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">Yükleniyor...</div>
+    <h1>2023 TYT SINAVI</h1>
+    <div class="clock">
+      <span id="days">02</span><span>.</span><span id="hours">14</span
+      ><span id="ayrac">:</span><span id="minutes">37</span
+      ><span id="ayrac">:</span><span id="seconds">04</span>
+    </div>
+    <script>
+      const loading = document.querySelector(".loading");
+      const gun = document.querySelector("#days");
+      const saat = document.querySelector("#hours");
+      const dakika = document.querySelector("#minutes");
+      const saniye = document.querySelector("#seconds");
+      const YKS_TARIH = new Date(2023, 5, 17, 10).getTime();
+
+      function zamaniYenile() {
+        const suan = new Date().getTime();
+        const kalan = YKS_TARIH - suan;
+
+        const kalanGun = Math.floor(kalan / (1000 * 60 * 60 * 24));
+        const kalanSaat = Math.floor(
+          (kalan % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const kalanDakika = Math.floor(
+          (kalan % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const kalanSaniye = Math.floor((kalan % (1000 * 60)) / 1000);
+
+        gun.textContent = kalanGun < 10 ? "0" + kalanGun : kalanGun;
+        saat.textContent = kalanSaat < 10 ? "0" + kalanSaat : kalanSaat;
+        dakika.textContent = kalanDakika < 10 ? "0" + kalanDakika : kalanDakika;
+        saniye.textContent = kalanSaniye < 10 ? "0" + kalanSaniye : kalanSaniye;
+      }
+
+      window.onload = () => {
+        setInterval(zamaniYenile, 250);
+        loading.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
