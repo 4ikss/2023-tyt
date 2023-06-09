@@ -104,9 +104,14 @@
       }
 
       window.onload = () => {
+        const nowTime = new Date().getTime();
+        if(YKS_TARIH < nowTime) {
+          alert("Sınav Zamanı Geçti!");
+          } else {
         setInterval(zamaniYenile, 250);
         loading.style.display = "none";
       };
+        }
     </script>
   </body>
 </html>
